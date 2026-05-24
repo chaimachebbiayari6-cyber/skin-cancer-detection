@@ -1,0 +1,100 @@
+{% extends "base.html" %}
+
+{% block title %}Tableau de Bord | DermoScan AI{% endblock %}
+
+{% block content %}
+<div class="animate-fade-in">
+    <!-- Header banner -->
+    <div class="row mb-5">
+        <div class="col-12">
+            <div class="premium-card d-flex flex-column flex-md-row align-items-md-center justify-content-between p-4">
+                <div>
+                    <h1 class="mb-1">Bonjour, <span class="text-teal">Dr. {{ session['user'] }}</span></h1>
+                    <p class="text-muted mb-0">Bienvenue sur votre espace d'analyse dermatologique assistée par Intelligence Artificielle.</p>
+                </div>
+                <div class="mt-3 mt-md-0">
+                    <span class="badge bg-teal bg-opacity-10 text-teal py-2 px-3 rounded-pill border border-teal border-opacity-20">
+                        <i class="fa-solid fa-circle-check me-1 animate-pulse"></i> Système IA Opérationnel
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Quick Stats Cards (KPIs) -->
+    <div class="row g-4 mb-5">
+        <div class="col-md-4">
+            <div class="stat-card">
+                <div class="stat-icon blue">
+                    <i class="fa-solid fa-users"></i>
+                </div>
+                <div>
+                    <h3 class="mb-0 fw-bold">DermoScan</h3>
+                    <p class="text-muted mb-0">Analyses dermatologiques</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="stat-card">
+                <div class="stat-icon teal">
+                    <i class="fa-solid fa-heart-circle-check"></i>
+                </div>
+                <div>
+                    <h3 class="mb-0 fw-bold">Classification</h3>
+                    <p class="text-muted mb-0">Benign ou Malignant</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="stat-card">
+                <div class="stat-icon rose">
+                    <i class="fa-solid fa-shield-halved"></i>
+                </div>
+                <div>
+                    <h3 class="mb-0 fw-bold">Modèle VGG16</h3>
+                    <p class="text-muted mb-0">Confiance en %</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Shortcut Cards -->
+    <div class="row g-4">
+        <!-- New Analysis Card -->
+        <div class="col-md-6">
+            <div class="premium-card text-center p-5 h-100 d-flex flex-column justify-content-between">
+                <div>
+                    <div class="stat-icon teal mx-auto mb-4" style="width: 70px; height: 70px; font-size: 2.2rem;">
+                        <i class="fa-solid fa-file-medical"></i>
+                    </div>
+                    <h3 class="mb-3">Nouvelle Analyse IA</h3>
+                    <p class="text-muted mb-4">Téléversez un cliché dermatologique (lésion, grain de beauté) pour obtenir une prédiction IA instantanée (Benign ou Malignant) avec son indice de confiance.</p>
+                </div>
+                <div>
+                    <a href="/predict" class="btn btn-primary-custom w-100 py-3 fs-5">
+                        <i class="fa-solid fa-plus-circle me-2"></i> Lancer une Analyse
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Patients List Card -->
+        <div class="col-md-6">
+            <div class="premium-card text-center p-5 h-100 d-flex flex-column justify-content-between">
+                <div>
+                    <div class="stat-icon blue mx-auto mb-4" style="width: 70px; height: 70px; font-size: 2.2rem;">
+                        <i class="fa-solid fa-hospital-user"></i>
+                    </div>
+                    <h3 class="mb-3">Historique des Analyses</h3>
+                    <p class="text-muted mb-4">Consultez l'historique complet de tous vos patients, leurs âges, les résultats des diagnostics IA précédents, ainsi que les clichés de lésions sauvegardés.</p>
+                </div>
+                <div>
+                    <a href="/patients" class="btn btn-primary-custom w-100 py-3 fs-5" style="background: linear-gradient(135deg, var(--color-primary), #4f46e5);">
+                        <i class="fa-solid fa-list-check me-2"></i> Voir les Historiques
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

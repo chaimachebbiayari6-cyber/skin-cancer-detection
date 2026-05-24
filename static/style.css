@@ -1,0 +1,400 @@
+/* ==========================================================================
+   DermoScan.AI - Custom Premium Style Sheet
+   ========================================================================== */
+
+/* Design Tokens & Variables */
+:root {
+    --bg-app: #0f172a;          /* Deep Slate Blue */
+    --bg-card: rgba(30, 41, 59, 0.7); /* Translucent Slate */
+    --border-card: rgba(255, 255, 255, 0.08);
+    
+    --color-primary: #0ea5e9;    /* Medical Blue/Sky */
+    --color-primary-hover: #0284c7;
+    
+    --color-teal: #14b8a6;       /* Medical Teal Accent */
+    --color-teal-hover: #0d9488;
+    
+    --color-danger: #f43f5e;     /* Rose-Red for Malignant */
+    --color-success: #10b981;    /* Emerald for Benign */
+    
+    --text-main: #f8fafc;        /* Off-white */
+    --text-muted: #94a3b8;       /* Cool Grey */
+    
+    --shadow-soft: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
+    --shadow-glow: 0 0 20px rgba(14, 165, 233, 0.15);
+    --radius-lg: 16px;
+    --radius-md: 12px;
+}
+
+/* Global Reset & Base */
+body {
+    background-color: var(--bg-app);
+    background-image: 
+        radial-gradient(at 0% 0%, rgba(14, 165, 233, 0.08) 0px, transparent 50%),
+        radial-gradient(at 100% 100%, rgba(20, 184, 166, 0.05) 0px, transparent 50%);
+    background-attachment: fixed;
+    color: var(--text-main);
+    font-family: 'Inter', sans-serif;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    overflow-x: hidden;
+}
+
+h1, h2, h3, h4, h5, h6, .navbar-brand {
+    font-family: 'Outfit', sans-serif;
+    font-weight: 600;
+    color: var(--text-main);
+}
+
+/* Scrollbar Customization */
+::-webkit-scrollbar {
+    width: 8px;
+}
+::-webkit-scrollbar-track {
+    background: var(--bg-app);
+}
+::-webkit-scrollbar-thumb {
+    background: #334155;
+    border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: #475569;
+}
+
+/* Accent Color Utilities */
+.text-teal {
+    color: var(--color-teal) !important;
+}
+.text-primary-sky {
+    color: var(--color-primary) !important;
+}
+
+/* Navbar (Glassmorphism) */
+.navbar {
+    background: rgba(15, 23, 42, 0.8) !important;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border-card);
+    padding: 1rem 0;
+    transition: all 0.3s ease;
+}
+
+.navbar-brand {
+    font-size: 1.4rem;
+    letter-spacing: -0.5px;
+}
+
+.navbar-brand strong {
+    font-weight: 800;
+}
+
+.nav-link {
+    color: var(--text-muted) !important;
+    font-size: 0.95rem;
+    font-weight: 500;
+    padding: 0.5rem 1rem !important;
+    border-radius: var(--radius-md);
+    transition: all 0.2s ease;
+    margin: 0 0.2rem;
+}
+
+.nav-link:hover, .nav-link.active {
+    color: var(--text-main) !important;
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.user-badge {
+    background: rgba(14, 165, 233, 0.15);
+    border: 1px solid rgba(14, 165, 233, 0.3);
+    padding: 0.4rem 0.8rem;
+    border-radius: 50px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--color-primary);
+}
+
+.btn-logout {
+    color: var(--text-muted);
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 0.4rem 0.8rem;
+    border-radius: var(--radius-md);
+    transition: all 0.2s ease;
+}
+
+.btn-logout:hover {
+    color: var(--color-danger);
+    background: rgba(244, 63, 94, 0.1);
+    border-color: rgba(244, 63, 94, 0.3);
+}
+
+/* Premium Card (Glassmorphism) */
+.premium-card {
+    background: var(--bg-card);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid var(--border-card);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-soft);
+    padding: 2.5rem;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+.premium-card:hover {
+    transform: translateY(-4px);
+    border-color: rgba(14, 165, 233, 0.2);
+    box-shadow: var(--shadow-soft), var(--shadow-glow);
+}
+
+/* Inputs & Form Controls */
+.form-control {
+    background-color: rgba(15, 23, 42, 0.6) !important;
+    border: 1px solid rgba(255, 255, 255, 0.12) !important;
+    color: var(--text-main) !important;
+    border-radius: var(--radius-md) !important;
+    padding: 0.75rem 1rem !important;
+    transition: all 0.2s ease !important;
+}
+
+.form-control:focus {
+    border-color: var(--color-primary) !important;
+    box-shadow: 0 0 0 3px rgba(14, 165, 233, 0.25) !important;
+    background-color: rgba(15, 23, 42, 0.8) !important;
+}
+
+.form-control::placeholder {
+    color: var(--text-muted) !important;
+    opacity: 0.7;
+}
+
+/* Buttons */
+.btn-primary-custom {
+    background: linear-gradient(135deg, var(--color-primary), var(--color-teal));
+    border: none;
+    color: white;
+    font-weight: 600;
+    padding: 0.75rem 1.5rem;
+    border-radius: var(--radius-md);
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(14, 165, 233, 0.25);
+}
+
+.btn-primary-custom:hover {
+    background: linear-gradient(135deg, var(--color-primary-hover), var(--color-teal-hover));
+    box-shadow: 0 6px 18px rgba(14, 165, 233, 0.4);
+    transform: translateY(-1px);
+    color: white;
+}
+
+/* Custom Upload Drag & Drop Zone */
+.upload-zone {
+    border: 2px dashed rgba(255, 255, 255, 0.2);
+    border-radius: var(--radius-lg);
+    padding: 2.5rem;
+    text-align: center;
+    background: rgba(15, 23, 42, 0.4);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.upload-zone:hover {
+    border-color: var(--color-teal);
+    background: rgba(20, 184, 166, 0.04);
+}
+
+.upload-icon {
+    font-size: 3rem;
+    color: var(--color-teal);
+    margin-bottom: 1rem;
+    transition: transform 0.2s ease;
+}
+
+.upload-zone:hover .upload-icon {
+    transform: translateY(-5px);
+}
+
+#imagePreviewContainer img {
+    max-height: 250px;
+    border-radius: var(--radius-md);
+    object-fit: cover;
+    box-shadow: var(--shadow-soft);
+    border: 2px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Dashboard Quick Stat Cards */
+.stat-card {
+    background: rgba(30, 41, 59, 0.4);
+    border: 1px solid var(--border-card);
+    border-radius: var(--radius-md);
+    padding: 1.5rem;
+    display: flex;
+    align-items: center;
+    transition: all 0.2s ease;
+}
+
+.stat-card:hover {
+    background: rgba(30, 41, 59, 0.6);
+    border-color: rgba(255, 255, 255, 0.15);
+}
+
+.stat-icon {
+    width: 50px;
+    height: 50px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    margin-right: 1rem;
+}
+
+.stat-icon.blue {
+    background: rgba(14, 165, 233, 0.15);
+    color: var(--color-primary);
+}
+
+.stat-icon.teal {
+    background: rgba(20, 184, 166, 0.15);
+    color: var(--color-teal);
+}
+
+.stat-icon.rose {
+    background: rgba(244, 63, 94, 0.15);
+    color: var(--color-danger);
+}
+
+/* Diagnosis Badges */
+.badge-diagnosis {
+    padding: 0.5rem 1rem;
+    border-radius: 50px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.badge-malignant {
+    background: rgba(244, 63, 94, 0.15);
+    color: var(--color-danger);
+    border: 1px solid rgba(244, 63, 94, 0.3);
+}
+
+.badge-benign {
+    background: rgba(16, 185, 129, 0.15);
+    color: var(--color-success);
+    border: 1px solid rgba(16, 185, 129, 0.3);
+}
+
+/* Premium Table */
+.premium-table {
+    border-collapse: separate;
+    border-spacing: 0 8px;
+    width: 100%;
+}
+
+.premium-table th {
+    color: var(--text-muted);
+    font-weight: 600;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    border: none;
+    padding: 1rem;
+}
+
+.premium-table tbody tr {
+    background: rgba(30, 41, 59, 0.5);
+    transition: all 0.2s ease;
+}
+
+.premium-table tbody tr:hover {
+    background: rgba(30, 41, 59, 0.8);
+    transform: scale(1.005);
+}
+
+.premium-table td {
+    padding: 1.25rem 1rem;
+    vertical-align: middle;
+    border-top: 1px solid var(--border-card);
+    border-bottom: 1px solid var(--border-card);
+}
+
+.premium-table td:first-child {
+    border-left: 1px solid var(--border-card);
+    border-top-left-radius: var(--radius-md);
+    border-bottom-left-radius: var(--radius-md);
+}
+
+.premium-table td:last-child {
+    border-right: 1px solid var(--border-card);
+    border-top-right-radius: var(--radius-md);
+    border-bottom-right-radius: var(--radius-md);
+}
+
+.patient-avatar {
+    width: 48px;
+    height: 48px;
+    border-radius: var(--radius-md);
+    object-fit: cover;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+.patient-avatar:hover {
+    transform: scale(1.1);
+}
+
+/* Result Gauge/Confidence Area */
+.confidence-box {
+    border-radius: var(--radius-lg);
+    padding: 2rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.confidence-box.malignant {
+    background: linear-gradient(135deg, rgba(244, 63, 94, 0.1) 0%, rgba(15, 23, 42, 0.6) 100%);
+    border: 1px solid rgba(244, 63, 94, 0.3);
+}
+
+.confidence-box.benign {
+    background: linear-gradient(135deg, rgba(16, 185, 129, 0.1) 0%, rgba(15, 23, 42, 0.6) 100%);
+    border: 1px solid rgba(16, 185, 129, 0.3);
+}
+
+.result-percentage {
+    font-family: 'Outfit', sans-serif;
+    font-size: 3.5rem;
+    font-weight: 800;
+    line-height: 1;
+    margin: 1rem 0;
+}
+
+/* Alert Styling Adjustments */
+.alert {
+    background: rgba(30, 41, 59, 0.8) !important;
+    border: 1px solid var(--border-card) !important;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border-radius: var(--radius-md);
+    color: var(--text-main);
+}
+
+.alert-success { border-color: rgba(16, 185, 129, 0.4) !important; }
+.alert-danger { border-color: rgba(244, 63, 94, 0.4) !important; }
+.alert-warning { border-color: rgba(245, 158, 11, 0.4) !important; }
+.alert-info { border-color: rgba(14, 165, 233, 0.4) !important; }
+
+/* Micro-animations */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fade-in {
+    animation: fadeIn 0.4s ease forwards;
+}

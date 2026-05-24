@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block title %}Connexion | DermoScan AI{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center align-items-center" style="min-height: 75vh;">
+    <div class="col-md-5">
+        <div class="premium-card text-center animate-fade-in">
+            <div class="mb-4">
+                <div class="stat-icon blue mx-auto d-flex align-items-center justify-content-center" style="width: 70px; height: 70px; border-radius: 50%; font-size: 2rem;">
+                    <i class="fa-solid fa-user-md"></i>
+                </div>
+            </div>
+            
+            <h2 class="mb-2">DermoScan<strong class="text-teal">.AI</strong></h2>
+            <p class="text-muted mb-4">Portail d'analyse clinique pour médecins</p>
+            
+            <form method="POST">
+                <div class="form-floating mb-3">
+                    <input type="text" class="form-control" id="username" name="username" placeholder="Identifiant" required autocomplete="off">
+                    <label for="username" class="text-muted"><i class="fa-solid fa-user me-2"></i>Identifiant</label>
+                </div>
+                
+                <div class="form-floating mb-4">
+                    <input type="password" class="form-control" id="password" name="password" placeholder="Mot de passe" required>
+                    <label for="password" class="text-muted"><i class="fa-solid fa-key me-2"></i>Mot de passe</label>
+                </div>
+                
+                <button type="submit" class="btn btn-primary-custom w-100 py-3 fs-5">
+                    <i class="fa-solid fa-right-to-bracket me-2"></i> Se Connecter
+                </button>
+            </form>
+            
+            <div class="mt-4 pt-3 border-top border-secondary border-opacity-25">
+                <small class="text-muted">Compte administrateur par défaut : <strong>admin</strong> / <strong>1234</strong></small>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,121 @@
+{% extends "base.html" %}
+
+{% block title %}Historique des Patients | DermoScan AI{% endblock %}
+
+{% block content %}
+<div class="animate-fade-in">
+    <div class="d-flex flex-column flex-md-row align-items-md-center justify-content-between mb-4">
+        <div class="d-flex align-items-center">
+            <div class="stat-icon blue me-3" style="width: 50px; height: 50px;">
+                <i class="fa-solid fa-hospital-user"></i>
+            </div>
+            <div>
+                <h2 class="mb-0">Registre des Patients</h2>
+                <p class="text-muted mb-0">Historique complet de toutes les consultations et prédictions IA.</p>
+            </div>
+        </div>
+        <div class="mt-3 mt-md-0">
+            <a href="/predict" class="btn btn-primary-custom">
+                <i class="fa-solid fa-plus me-1"></i> Nouvelle Analyse
+            </a>
+        </div>
+    </div>
+
+    <!-- Patients List Card Container -->
+    <div class="premium-card p-4">
+        {% if patients %}
+        <div class="table-responsive">
+            <table class="premium-table">
+                <thead>
+                    <tr>
+                        <th>Date d'Analyse</th>
+                        <th>Nom du Patient</th>
+                        <th>Âge</th>
+                        <th>Diagnostic IA</th>
+                        <th>Certitude IA</th>
+                        <th class="text-center">Cliché Lésion</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for p in patients %}
+                    <tr>
+                        <!-- Analysis Date -->
+                        <td class="text-muted small">
+                            {% if p.created_at is string %}
+                                {{ p.created_at }}
+                            {% else %}
+                                {{ p.created_at.strftime('%d/%m/%Y à %H:%M') }}
+                            {% endif %}
+                        </td>
+                        <!-- Patient Name -->
+                        <td><strong class="text-white">{{ p.name }}</strong></td>
+                        <!-- Patient Age -->
+                        <td>{{ p.age }} ans</td>
+                        <!-- Diagnosis Badge -->
+                        <td>
+                            {% if p.result == "Malignant" %}
+                            <span class="badge-diagnosis badge-malignant">
+                                <i class="fa-solid fa-triangle-exclamation"></i> Malin
+                            </span>
+                            {% else %}
+                            <span class="badge-diagnosis badge-benign">
+                                <i class="fa-solid fa-circle-check"></i> Bénin
+                            </span>
+                            {% endif %}
+                        </td>
+                        <!-- Probability Confidence -->
+                        <td>
+                            {% if p.result == "Malignant" %}
+                                <strong class="text-danger">{{ (p.probability * 100) | round(2) }}%</strong>
+                            {% else %}
+                                <strong class="text-success">{{ ( (1.0 - p.probability) * 100 ) | round(2) }}%</strong>
+                            {% endif %}
+                        </td>
+                        <!-- Patient Image Preview with zoom modal trigger -->
+                        <td class="text-center">
+                            <img src="/{{ p.image_path }}" alt="Lésion" class="patient-avatar img-thumbnail" 
+                                 data-bs-toggle="modal" data-bs-target="#imageModal" 
+                                 onclick="showZoomModal('/{{ p.image_path }}', '{{ p.name }}');">
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        {% else %}
+        <div class="text-center py-5">
+            <i class="fa-solid fa-folder-open text-muted mb-3" style="font-size: 3rem;"></i>
+            <h4 class="text-muted">Aucune analyse enregistrée</h4>
+            <p class="text-muted small">Commencez par ajouter un patient et lancer une détection IA.</p>
+        </div>
+        {% endif %}
+    </div>
+</div>
+
+<!-- Image Zoom Bootstrap Modal -->
+<div class="modal fade" id="imageModal" tabindex="-1" aria-labelledby="imageModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content bg-dark border border-secondary border-opacity-25 rounded-3">
+            <div class="modal-header border-bottom border-secondary border-opacity-25">
+                <h5 class="modal-title text-white" id="imageModalLabel">Cliché Dermatologique</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body text-center p-3">
+                <img id="modalZoomImage" src="" alt="Zoom Lésion" class="img-fluid rounded-3 shadow-lg" style="max-height: 450px; object-fit: contain;">
+            </div>
+            <div class="modal-footer border-top border-secondary border-opacity-25 py-2">
+                <span id="modalPatientName" class="text-teal fw-bold small me-auto"></span>
+                <button type="button" class="btn btn-logout py-1 px-3" data-bs-dismiss="modal">Fermer</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Zoom Modal Helper Script -->
+<script>
+    function showZoomModal(imgSrc, patientName) {
+        document.getElementById('modalZoomImage').src = imgSrc;
+        document.getElementById('modalPatientName').innerHTML = '<i class="fa-solid fa-user me-1"></i> Patient : ' + patientName;
+    }
+</script>
+{% endblock %}

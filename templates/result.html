@@ -1,0 +1,88 @@
+{% extends "base.html" %}
+
+{% block title %}Résultat du Diagnostic | DermoScan AI{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center animate-fade-in">
+    <div class="col-lg-6 col-md-8">
+        <div class="premium-card text-center">
+            
+            <h2 class="mb-4">Résultat de l'Analyse IA</h2>
+
+            <!-- Conditional Styling based on Diagnosis -->
+            {% if result == "Malignant" %}
+            <div class="confidence-box malignant mb-4">
+                <div class="stat-icon rose mx-auto mb-3" style="width: 60px; height: 60px; font-size: 1.8rem; border-radius: 50%;">
+                    <i class="fa-solid fa-triangle-exclamation"></i>
+                </div>
+                <h4 class="text-danger fw-bold uppercase mb-1">Lésion Suspecte</h4>
+                <h3 class="fw-extrabold text-white">MALIGNE (Malignant)</h3>
+                
+                <div class="result-percentage text-danger">
+                    {{ prob }}%
+                </div>
+                <p class="text-muted small mb-0">Indice de confiance de la détection de malignité</p>
+            </div>
+            {% else %}
+            <div class="confidence-box benign mb-4">
+                <div class="stat-icon teal mx-auto mb-3" style="width: 60px; height: 60px; font-size: 1.8rem; border-radius: 50%;">
+                    <i class="fa-solid fa-circle-check"></i>
+                </div>
+                <h4 class="text-success fw-bold uppercase mb-1">Lésion Saine</h4>
+                <h3 class="fw-extrabold text-white">BÉNIGNE (Benign)</h3>
+                
+                <div class="result-percentage text-success">
+                    {{ prob }}%
+                </div>
+                <p class="text-muted small mb-0">Indice de confiance de la détection de bénignité</p>
+            </div>
+            {% endif %}
+
+            <!-- Confidence Progress Bar -->
+            <div class="mb-4 text-start">
+                <span class="text-muted small fw-bold">Confiance de l'IA</span>
+                <div class="progress mt-1" style="height: 10px; background-color: rgba(255, 255, 255, 0.1); border-radius: 5px;">
+                    {% if result == "Malignant" %}
+                    <div class="progress-bar bg-danger" role="progressbar" style="width: {{ prob }}%;" aria-valuenow="{{ prob }}" aria-valuemin="0" aria-valuemax="100"></div>
+                    {% else %}
+                    <div class="progress-bar bg-success" role="progressbar" style="width: {{ prob }}%;" aria-valuenow="{{ prob }}" aria-valuemin="0" aria-valuemax="100"></div>
+                    {% endif %}
+                </div>
+            </div>
+
+            <!-- Original Image Display -->
+            <div class="my-4">
+                <span class="d-block text-muted small fw-bold mb-2">Cliché Analysé</span>
+                <!-- We add a leading slash to ensure it resolves correctly from any sub-path -->
+                <img src="/{{ img }}" alt="Cliché Lésion" class="img-fluid rounded-3 shadow-sm border border-secondary border-opacity-25" style="max-height: 220px; object-fit: cover;">
+            </div>
+
+            <!-- Medical Disclaimer / Recommendation -->
+            <div class="alert alert-secondary p-3 mt-4 text-start border border-secondary border-opacity-10">
+                <div class="d-flex">
+                    <i class="fa-solid fa-circle-info fs-5 me-3 text-primary-sky mt-1"></i>
+                    <div>
+                        <strong class="text-white">Note Clinique :</strong> 
+                        {% if result == "Malignant" %}
+                        Ce résultat indique une forte probabilité de mélanome ou carcinome. Il est recommandé de programmer une consultation approfondie avec biopsie en urgence.
+                        {% else %}
+                        La lésion présente des caractéristiques bénignes régulières. Une surveillance périodique standard (règle ABCDE) reste conseillée à titre préventif.
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+
+            <!-- Controls -->
+            <div class="d-flex gap-3 justify-content-center mt-5 pt-3 border-top border-secondary border-opacity-25">
+                <a class="btn btn-logout px-4" href="/dashboard">
+                    <i class="fa-solid fa-house me-2"></i> Accueil
+                </a>
+                <a class="btn btn-primary-custom px-4" href="/predict">
+                    <i class="fa-solid fa-repeat me-2"></i> Autre Analyse
+                </a>
+            </div>
+
+        </div>
+    </div>
+</div>
+{% endblock %}

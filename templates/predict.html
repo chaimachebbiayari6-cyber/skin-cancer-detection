@@ -1,0 +1,84 @@
+{% extends "base.html" %}
+
+{% block title %}Nouvelle Analyse | DermoScan AI{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center animate-fade-in">
+    <div class="col-lg-8 col-md-10">
+        <div class="premium-card">
+            <div class="d-flex align-items-center mb-4">
+                <div class="stat-icon teal me-3" style="width: 50px; height: 50px;">
+                    <i class="fa-solid fa-microscope"></i>
+                </div>
+                <div>
+                    <h2 class="mb-0">Nouvelle Analyse Clinique</h2>
+                    <p class="text-muted mb-0">Remplissez les informations du patient et téléversez la lésion cutanée.</p>
+                </div>
+            </div>
+
+            <form method="POST" enctype="multipart/form-data">
+                <div class="row g-3 mb-4">
+                    <!-- Patient Name -->
+                    <div class="col-md-8">
+                        <label for="name" class="form-label text-muted fw-bold">Nom Complet du Patient</label>
+                        <div class="input-group">
+                            <span class="input-group-text bg-dark border-secondary border-opacity-25 text-muted"><i class="fa-solid fa-hospital-user"></i></span>
+                            <input type="text" class="form-control" id="name" name="name" placeholder="Ex: Jean Dupont" required autocomplete="off">
+                        </div>
+                    </div>
+                    <!-- Patient Age -->
+                    <div class="col-md-4">
+                        <label for="age" class="form-label text-muted fw-bold">Âge</label>
+                        <div class="input-group">
+                            <span class="input-group-text bg-dark border-secondary border-opacity-25 text-muted"><i class="fa-solid fa-calendar"></i></span>
+                            <input type="number" class="form-control" id="age" name="age" placeholder="Ex: 45" min="0" max="120" required>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Custom Upload Zone -->
+                <div class="mb-4">
+                    <label class="form-label text-muted fw-bold">Lésion Cutanée à Analyser</label>
+                    <div class="upload-zone" onclick="document.getElementById('image').click();">
+                        <i class="fa-solid fa-cloud-arrow-up upload-icon"></i>
+                        <h4 class="mb-2">Cliquez pour choisir un cliché</h4>
+                        <p class="text-muted mb-0">Formats supportés : JPG, JPEG, PNG</p>
+                        <input class="d-none" type="file" id="image" name="image" accept="image/*" required>
+                    </div>
+                </div>
+
+                <!-- Real-time Image Preview Container -->
+                <div id="imagePreviewContainer" class="d-none text-center mb-4 p-3 bg-dark bg-opacity-20 border border-secondary border-opacity-25 rounded-3">
+                    <p class="text-muted mb-2 fw-bold"><i class="fa-regular fa-image me-1"></i> Aperçu de l'image sélectionnée</p>
+                    <img id="previewImage" src="" alt="Aperçu" class="img-fluid">
+                </div>
+
+                <!-- Submit Button -->
+                <div class="d-flex justify-content-between align-items-center mt-5 pt-3 border-top border-secondary border-opacity-25">
+                    <a href="/dashboard" class="btn btn-logout px-4 py-2">
+                        <i class="fa-solid fa-chevron-left me-2"></i> Annuler
+                    </a>
+                    <button type="submit" class="btn btn-primary-custom px-5 py-3 fs-5">
+                        <i class="fa-solid fa-wand-magic-sparkles me-2"></i> Lancer l'Analyse IA
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Image Preview Script -->
+<script>
+    document.getElementById('image').addEventListener('change', function(e) {
+        if(e.target.files && e.target.files[0]) {
+            const reader = new FileReader();
+            reader.onload = function(event) {
+                const img = document.getElementById('previewImage');
+                img.src = event.target.result;
+                document.getElementById('imagePreviewContainer').classList.remove('d-none');
+            };
+            reader.readAsDataURL(e.target.files[0]);
+        }
+    });
+</script>
+{% endblock %}
